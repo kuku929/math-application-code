@@ -2,6 +2,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// long double **multiply(long double **a, long double **b){
+// 	long double **ans = (long double **)malloc(sizeof(long double *)*3);
+// 	for(int i=0;i<3;i++)ans[i] = (long double *)malloc(sizeof(long double)*3);
+// 	for(int i=0;i<3;i++){
+// 		for(int j=0;j<3;j++){
+// 			long double cell_value = 0;
+// 			for(int k = 0;k<3;k++) cell_value += a[i][k]*b[k][j];
+// 			ans[i][j] = cell_value;
+// 		}
+// 	}
+// 	return ans;
+// }
 long double **matrix_power(long double a[3][3], int power){
 	if(power == 1){
 		long double **c =  (long double**)malloc(sizeof(long double *)*3);
@@ -24,13 +36,16 @@ long double **matrix_power(long double a[3][3], int power){
 			}
 		}
 	if(power&1){
+	long double **ans1 = (long double **)malloc(sizeof(long double *)*3);
+	for(int i=0;i<3;i++)ans1[i] = (long double *)malloc(sizeof(long double)*3);
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
 				long double cell_value = 0;
 				for(int k = 0;k<3;k++) cell_value += ans[i][k]*a[k][j];
-				ans[i][j] = cell_value;
+				ans1[i][j] = cell_value;
 			}
 		}
+		return ans1;
 	}
 	return ans;
 
@@ -46,6 +61,7 @@ int main(){
 
 
 	long double **ans = matrix_power(a, power);
+	// cout << 2;
 	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
 			cout << ans[i][j]<<' ';
